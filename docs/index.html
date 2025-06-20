@@ -2,153 +2,263 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Illinois State Roleplay Rules</title>
   <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #121212;
-      color: #e0e0e0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #121212, #1c1c1c);
+      color: #ddd;
       display: flex;
+      min-height: 100vh;
     }
 
+    /* Sidebar */
     nav {
-      width: 250px;
-      background-color: #1e1e1e;
-      padding: 20px;
-      height: 100vh;
+      width: 260px;
+      background: #222;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.7);
+      padding: 1.5rem 1rem;
       position: sticky;
       top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-
     nav h2 {
-      color: #ffffff;
-      font-size: 20px;
+      color: #00d1b2;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: 1.5px;
+      font-size: 1.5rem;
+      text-align: center;
     }
-
     nav ul {
       list-style: none;
       padding: 0;
+      margin: 0;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
-
-    nav li {
-      margin: 10px 0;
-    }
-
     nav a {
-      color: #aaaaaa;
       text-decoration: none;
+      color: #aaa;
+      font-weight: 600;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      transition: all 0.25s ease;
+      user-select: none;
+    }
+    nav a:hover, nav a:focus {
+      color: #00d1b2;
+      background: #111;
+      outline: none;
     }
 
-    nav a:hover {
-      color: #ffffff;
-    }
-
+    /* Main content */
     main {
       flex-grow: 1;
-      padding: 20px;
+      padding: 2rem 3rem;
       overflow-y: auto;
+      scroll-behavior: smooth;
+      max-width: 1000px;
+      margin: auto;
     }
 
     header {
-      background: #292929;
-      padding: 20px;
-      border-bottom: 2px solid #444;
-      font-size: 28px;
-      font-weight: bold;
       text-align: center;
+      font-size: 2.6rem;
+      font-weight: 900;
+      margin-bottom: 2rem;
+      letter-spacing: 3px;
+      color: #00d1b2;
+      text-shadow: 0 0 8px #00d1b2;
     }
 
+    /* Search box */
+    .search-box {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .search-box input {
+      width: 60%;
+      max-width: 400px;
+      padding: 12px 18px;
+      border-radius: 30px;
+      border: none;
+      background: #2a2a2a;
+      color: #ddd;
+      font-size: 1rem;
+      box-shadow: inset 0 0 8px #000;
+      transition: background 0.3s ease;
+    }
+    .search-box input:focus {
+      background: #1a1a1a;
+      outline: none;
+      box-shadow: 0 0 8px #00d1b2;
+      color: #00d1b2;
+    }
+
+    /* Section styling */
     section {
-      margin-bottom: 40px;
+      margin-bottom: 3rem;
+      background: #1e1e1e;
+      padding: 1.6rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 209, 178, 0.15);
     }
 
-    h3 {
-      color: #00bcd4;
-      border-bottom: 1px solid #333;
-      padding-bottom: 5px;
+    section h3 {
+      font-weight: 800;
+      font-size: 1.9rem;
+      color: #00d1b2;
+      margin-bottom: 1rem;
+      border-bottom: 3px solid #00d1b2;
+      padding-bottom: 0.25rem;
+      letter-spacing: 1.2px;
     }
 
+    /* Tables */
     table {
       width: 100%;
-      border-collapse: collapse;
-      background-color: #1b1b1b;
+      border-collapse: separate;
+      border-spacing: 0 0.8rem;
+      font-size: 1rem;
+      color: #ccc;
     }
-
-    table th, table td {
-      border: 1px solid #444;
-      padding: 8px;
+    th, td {
       text-align: left;
-    }
-
-    table th {
-      background-color: #333;
-    }
-
-    .search-box {
-      margin: 20px 0;
-      text-align: center;
-    }
-
-    .search-box input {
-      padding: 10px;
-      width: 80%;
+      padding: 14px 20px;
+      background: #2a2a2a;
       border-radius: 8px;
-      border: none;
-      background: #222;
-      color: white;
+    }
+    th {
+      background: #00d1b2;
+      color: #121212;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0,209,178,0.3);
+    }
+    tr:hover td {
+      background: #333;
+      cursor: default;
+      transition: background 0.3s ease;
+    }
+
+    /* Punishment colors */
+    .warning { color: #f9d423; font-weight: 600; }
+    .kick { color: #f08a5d; font-weight: 600; }
+    .ban-short { color: #f85f73; font-weight: 700; }
+    .ban-long { color: #b00020; font-weight: 700; }
+
+    /* Scrollbar */
+    main::-webkit-scrollbar {
+      width: 10px;
+    }
+    main::-webkit-scrollbar-track {
+      background: #111;
+      border-radius: 10px;
+    }
+    main::-webkit-scrollbar-thumb {
+      background: #00d1b2;
+      border-radius: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+      nav {
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+      nav ul {
+        flex-direction: row;
+        gap: 1rem;
+      }
+      main {
+        padding: 1rem 1.5rem;
+        max-width: 100%;
+        margin: 0;
+      }
+      section {
+        padding: 1rem 1.2rem;
+      }
     }
   </style>
 </head>
 <body>
   <nav>
-    <h2>Navigation</h2>
+    <h2>RULES MENU</h2>
     <ul>
-      <li><a href="#in-game">In-Game Rules</a></li>
-      <li><a href="#discord">Discord Rules</a></li>
+      <li><a href="#in-game" tabindex="1">In-Game Rules</a></li>
+      <li><a href="#discord" tabindex="2">Discord Rules</a></li>
     </ul>
   </nav>
-
   <main>
     <header>ILLINOIS STATE ROLEPLAY RULES</header>
-
     <div class="search-box">
-      <input type="text" placeholder="Search rules... (Coming soon JS)" disabled>
+      <input type="text" placeholder="Search rules... (coming soon)" disabled />
     </div>
 
-    <section id="in-game">
+    <section id="in-game" tabindex="0">
       <h3>In-Game Rules</h3>
       <table>
-        <tr><th>Offense</th><th>First Offense</th><th>Second Offense</th></tr>
-        <tr><td>RDM (Random Deathmatch)</td><td>Warning or Kick</td><td>1-day Ban</td></tr>
-        <tr><td>VDM (Vehicle Deathmatch)</td><td>Warning or Kick</td><td>1-day Ban</td></tr>
-        <tr><td>RDM in Green Zones</td><td>1-day Ban</td><td>3-day Ban</td></tr>
-        <tr><td>Staff RDM</td><td>2-day Ban</td><td>Permanent Ban</td></tr>
-        <tr><td>Staff VDM</td><td>2-day Ban</td><td>Permanent Ban</td></tr>
-        <tr><td>FailRP</td><td>Warning or Kick</td><td>1-day Ban</td></tr>
-        <tr><td>Combat Logging</td><td>1-day Ban</td><td>3-day Ban</td></tr>
-        <tr><td>CAD not active</td><td>Warning</td><td>Kick from server</td></tr>
-        <tr><td>Cop Baiting</td><td>Kick</td><td>1-day Ban</td></tr>
-        <tr><td>Exploiting / Glitch Abuse</td><td>Permanent Ban</td><td>---</td></tr>
-        <tr><td>Staff Disrespect</td><td>Warning</td><td>1-day Ban</td></tr>
+        <thead>
+          <tr>
+            <th>Offense</th>
+            <th>1st Offense</th>
+            <th>2nd Offense</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>RDM (Random Deathmatch)</td><td class="warning">Warning or Kick</td><td class="ban-short">1-day Ban</td></tr>
+          <tr><td>VDM (Vehicle Deathmatch)</td><td class="warning">Warning or Kick</td><td class="ban-short">1-day Ban</td></tr>
+          <tr><td>RDM in Green Zones</td><td class="ban-short">1-day Ban</td><td class="ban-long">3-day Ban</td></tr>
+          <tr><td>Staff RDM</td><td class="ban-short">2-day Ban</td><td class="ban-long">Permanent Ban</td></tr>
+          <tr><td>Staff VDM</td><td class="ban-short">2-day Ban</td><td class="ban-long">Permanent Ban</td></tr>
+          <tr><td>FailRP</td><td class="warning">Warning or Kick</td><td class="ban-short">1-day Ban</td></tr>
+          <tr><td>Combat Logging</td><td class="ban-short">1-day Ban</td><td class="ban-long">3-day Ban</td></tr>
+          <tr><td>CAD Not Active</td><td class="warning">Warning</td><td class="kick">Kick from Server</td></tr>
+          <tr><td>Cop Baiting</td><td class="kick">Kick</td><td class="ban-short">1-day Ban</td></tr>
+          <tr><td>Exploiting / Glitch Abuse</td><td class="ban-long">Permanent Ban</td><td>---</td></tr>
+          <tr><td>Staff Disrespect</td><td class="warning">Warning</td><td class="ban-short">1-day Ban</td></tr>
+          <tr><td>CAD Mandatory</td><td colspan="2">Must have CAD active at all times while on duty</td></tr>
+        </tbody>
       </table>
     </section>
 
-    <section id="discord">
+    <section id="discord" tabindex="0">
       <h3>Discord Rules</h3>
       <table>
-        <tr><th>Rule</th><th>Description</th></tr>
-        <tr><td>Be Respectful</td><td>No hate speech, racism, discrimination, bullying, or harassment.</td></tr>
-        <tr><td>No NSFW Content</td><td>This is a family-friendly community. Keep all content clean.</td></tr>
-        <tr><td>No Spamming</td><td>Avoid excessive messages, emojis, mentions, or mic spamming in VC.</td></tr>
-        <tr><td>No Self-Promotion</td><td>Do not advertise without admin permission.</td></tr>
-        <tr><td>Use Channels Correctly</td><td>Post in the appropriate channels.</td></tr>
-        <tr><td>Follow Discord TOS</td><td>Must be 13+ and follow Discord's Terms of Service.</td></tr>
-        <tr><td>Respect Staff</td><td>Listen to moderators and administrators at all times.</td></tr>
-        <tr><td>Use English Only</td><td>Communicate in English for moderation purposes.</td></tr>
-        <tr><td>No Toxicity</td><td>Do not bring drama or toxicity into public chats.</td></tr>
-        <tr><td>No Threats</td><td>No threats of harm, DDOS, doxxing, etc. — results in immediate ban.</td></tr>
+        <thead>
+          <tr>
+            <th>Rule</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Be Respectful</td><td>No hate speech, racism, discrimination, bullying, or harassment.</td></tr>
+          <tr><td>No NSFW Content</td><td>Family-friendly community; keep content clean.</td></tr>
+          <tr><td>No Spamming</td><td>Avoid excessive messages, emojis, mentions, or mic spam in VC.</td></tr>
+          <tr><td>No Self-Promotion</td><td>No advertising other servers or groups without admin permission.</td></tr>
+          <tr><td>Use Channels Correctly</td><td>Post content in the appropriate channels.</td></tr>
+          <tr><td>Follow Discord TOS</td><td>Must be 13+ and comply with Discord's Terms of Service.</td></tr>
+          <tr><td>Respect Staff</td><td>Listen to moderators and admins at all times.</td></tr>
+          <tr><td>Use English Only</td><td>Communicate in English for moderation purposes.</td></tr>
+          <tr><td>No Toxicity</td><td>Avoid drama and toxicity in public chats.</td></tr>
+          <tr><td>No Threats</td><td>No threats of harm, DDOS, doxxing, or harassment — immediate ban.</td></tr>
+        </tbody>
       </table>
     </section>
   </main>
