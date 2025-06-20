@@ -6,22 +6,23 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   if (!searchInput) {
-    console.error('Search input not found!');
+    console.error('Search input element with id "ruleSearch" not found.');
     return;
   }
-  if (tables.some(t => !t)) {
-    console.error('One or more tables not found!');
+
+  if (tables.some(table => !table)) {
+    console.error('One or more tables with ids "inGameTable" or "discordTable" not found.');
     return;
   }
 
   searchInput.addEventListener('input', () => {
-    const filter = searchInput.value.toLowerCase();
-    // console.log('Filtering:', filter);
+    const filter = searchInput.value.toLowerCase().trim();
 
     tables.forEach(table => {
       const rows = table.tBodies[0].rows;
       for (let row of rows) {
-        const rowText = Array.from(row.cells).map(td => td.textContent.toLowerCase()).join(' ');
+        // Combine text from all cells in the row
+        const rowText = Array.from(row.cells).map(cell => cell.textContent.toLowerCase()).join(' ');
         row.style.display = rowText.includes(filter) ? '' : 'none';
       }
     });
