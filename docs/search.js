@@ -1,4 +1,3 @@
-// Wait until DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('ruleSearch');
   const tables = [
@@ -6,15 +5,23 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('discordTable')
   ];
 
+  if (!searchInput) {
+    console.error('Search input not found!');
+    return;
+  }
+  if (tables.some(t => !t)) {
+    console.error('One or more tables not found!');
+    return;
+  }
+
   searchInput.addEventListener('input', () => {
     const filter = searchInput.value.toLowerCase();
+    // console.log('Filtering:', filter);
 
     tables.forEach(table => {
       const rows = table.tBodies[0].rows;
       for (let row of rows) {
-        // Combine all cell text content for searching
         const rowText = Array.from(row.cells).map(td => td.textContent.toLowerCase()).join(' ');
-        // Show/hide rows based on match
         row.style.display = rowText.includes(filter) ? '' : 'none';
       }
     });
